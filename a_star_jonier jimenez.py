@@ -52,9 +52,17 @@ class AStar(object):
         @param cell
         @returns heuristic value H
         return 10 * (abs(cell.x - self.end.x) + abs(cell.y - self.end.y))
+        return sqrt((self.end.x - cell.x)**2 + (self.end.y - cell.y)**2)+mov
         return sqrt((self.end.x-cell.x)**2 + (self.end.y-cell.y)**2)
         """
-        return sqrt((self.end.x - cell.x)**2 + (self.end.y - cell.y)**2)
+        mov=0 
+        if(cell.x > self.old):
+            mov = 3
+        elif(cell.x < self.old):
+            mov=4
+        else:
+            mov=2
+        return 10 * (abs(cell.x - self.end.x) + abs(cell.y - self.end.y))+mov
 
     def get_cell(self, x, y):
         """
